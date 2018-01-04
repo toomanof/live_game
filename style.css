@@ -1,0 +1,35 @@
+#wrapper-body{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%
+}
+#wrapper{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 970px;
+    position: absolute;
+}
+
+#wrapper .row{
+    display: flex;
+    flex-direction: row;    
+}
+
+#wrapper .cell{
+    border: 1px solid #000;
+    width: 50px;
+    height: 50px;
+    margin: 1px;
+    cursor: pointer;
+}
+
+#wrapper .cell:hover{
+background: url(chip.png);    
+}
+.wrapper_send{
+    display: flex;
+    flex: auto;
+}
+
