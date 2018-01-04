@@ -7,11 +7,10 @@ from flask import make_response, request, current_app
 from functools import update_wrapper
 from  itertools import product
 from  itertools import chain
-from pprint import pprint
 
 
 app = Flask(__name__)
-
+old_content = []
 
 def crossdomain(origin=None, methods=None, headers=None,
                 max_age=21600, attach_to_all=True,
@@ -74,9 +73,11 @@ def advance(board):
 @app.route('/json', methods = ['POST','GET'])
 @crossdomain('*')
 def test_my_api():
+    global old_content
     dataDict = request.form.to_dict()        
     items_ajax =dataDict.keys()
     p = json.loads(items_ajax[0])
-    pprint(p['data'])
     _content = [ list(item) for item in advance(set([(int(item[0]), int(item[1])) for item in p['data']]))]
-    return jsonify({'die_live':p['data'] == _content, 'data':_content})
+    die_live = p['data'] == _content or old_content == _content
+    old_content = _content
+    return jsonify({'die_live':die_live, 'data':_content})
